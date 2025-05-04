@@ -68,6 +68,14 @@ Create the following routes as efficiently as possible, using validation where a
 
 <br>  
 
+## Questions
+
+1. No. For patients i used a /id route in a PUT request, while for employees i used a /id/department route in a PATCH request.
+2. I chose this strategy because the PUT request allow for a single operation to update all the information, and as long as I have the id I can update any patients. 
+On the other hand, the employees need to update specific parts, and altought it can be done with a single PATCH request, I prefered to divide the patch operation into two different routes, in order to not read a whole DTO with all the entity fields but with specific DTOs.
+3. In the patients case, this route is straight forward, however as it is using a PUT request, it comes with the disadvantage of requiring the whole entity to be sent. 
+In the employees case, this kind of routes allow to send only the fields that need to be updated, however as the application scales and have more complex entities this route will be harder to maintain because the number of routes will grow.
+4. PUT requires to send more data because it sends the whole entity but allows to update all the fields at once, and PATCH allow to send small portions of data but only updates the entity partially.
 ## FAQs
 
 <br>
