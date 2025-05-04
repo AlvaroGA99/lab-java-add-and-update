@@ -1,6 +1,8 @@
 package com.ironhack.lab_java_add_and_update.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.sql.Date;
 
@@ -12,8 +14,11 @@ public class Patient {
     @Column(name = "patient_id")
     private Long patientId;
 
+    @NotEmpty
+    @NotNull
     private String name;
 
+    @NotNull
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 

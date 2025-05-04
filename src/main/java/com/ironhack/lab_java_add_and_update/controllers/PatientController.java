@@ -2,6 +2,7 @@ package com.ironhack.lab_java_add_and_update.controllers;
 
 import com.ironhack.lab_java_add_and_update.models.Patient;
 import com.ironhack.lab_java_add_and_update.repositories.PatientRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -47,4 +48,20 @@ public class PatientController {
         return patientRepository.findByOffDoctorStatus();
     }
 
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Patient createPatient(@RequestBody @Valid Patient patient) {
+        return patientRepository.save(patient);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Patient updatePatient(@PathVariable Long id, @RequestBody @Valid Patient patient) {
+        Patient existingPatient = patientRepository.findById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Patient not found"));
+        existingPatient.setName(patient.getName());
+        existingPatient.setDateOfBirth(patient.getDateOfBirth());
+        existingPatient.setAddmittedBy(patient.getAddmittedBy());
+        return patientRepository.save(existingPatient);
+    }
 }

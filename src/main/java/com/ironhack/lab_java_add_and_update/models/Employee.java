@@ -2,6 +2,8 @@ package com.ironhack.lab_java_add_and_update.models;
 
 import com.ironhack.lab_java_add_and_update.EmployeeStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "employees")
@@ -10,9 +12,16 @@ public class Employee {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     @Column(name = "employee_id")
     private Long employeeId;
+
+    @NotEmpty
+    @NotNull
     private String department;
+
+    @NotEmpty
+    @NotNull
     private String name;
 
+     @NotNull
     @Enumerated(EnumType.STRING)
     private EmployeeStatus status;
 
